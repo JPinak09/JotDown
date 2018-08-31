@@ -22,6 +22,8 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.joshipinak.jotdown.Adapter.NotesCursorAdapter;
 import com.joshipinak.jotdown.Provider.NotesProvider;
@@ -39,7 +41,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Sample AdMob app ID: ca-app-pub-2585351524810756~4648568865
         MobileAds.initialize(this,"ca-app-pub-2585351524810756~4648568865");
-
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -135,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
-    public void openEditorForNewNote(View view) {
+    private void openEditorForNewNote(View view) {
         Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
         startActivityForResult(intent, EDITOR_REQUEST_CODE);
     }

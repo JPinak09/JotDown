@@ -20,32 +20,34 @@
         android:visibility="gone">
 
         <TextView
-            android:layout_centerInParent="true"
             android:id="@+id/tv_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="@string/no_notes"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_two"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_one"
+            android:layout_centerHorizontal="true"
             android:text="@string/note_desc" />
     </RelativeLayout>
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-2585351524810756/9845055228">
-    </com.google.android.gms.ads.AdView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-2585351524810756/9845055228"/>
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
