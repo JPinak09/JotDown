@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- Sample AdMob App ID: ca-app-pub-2585351524810756~4648568865 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2585351524810756~4648568865" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

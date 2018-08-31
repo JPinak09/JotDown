@@ -22,6 +22,7 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
 import com.joshipinak.jotdown.Adapter.NotesCursorAdapter;
 import com.joshipinak.jotdown.Provider.NotesProvider;
 
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Sample AdMob app ID: ca-app-pub-2585351524810756~4648568865
+        MobileAds.initialize(this,"ca-app-pub-2585351524810756~4648568865");
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
