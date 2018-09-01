@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.joshipinak.jotdown.Adapter.NotesCursorAdapter;
+import com.joshipinak.jotdown.Adapter.NotesAdapter;
 import com.joshipinak.jotdown.Provider.NotesProvider;
 
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        cursorAdapter = new NotesCursorAdapter(this, null, 0);
+        cursorAdapter = new NotesAdapter(this, null, 0);
         ListView list = findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
         list.setEmptyView(findViewById(R.id.empty_desc));
