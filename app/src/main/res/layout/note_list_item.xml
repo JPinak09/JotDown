@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
     android:padding="@dimen/main_padding">
 
     <ImageView
         android:id="@+id/imageDocIcon"
         android:layout_width="@dimen/icon_width_size"
         android:layout_height="@dimen/icon_height_size"
+        android:contentDescription="@string/list_image_icon"
         android:src="@drawable/ic_document"
-        android:contentDescription="@string/list_image_icon" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:paddingTop="4dp"
         android:id="@+id/tvNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="4dp"
-        android:layout_toEndOf="@+id/imageDocIcon"
-        android:singleLine="true"
         android:textColor="@color/list_item_text"
-        android:textSize="18sp" />
+        android:textSize="@dimen/note_text_size"
+        app:layout_constraintStart_toEndOf="@+id/imageDocIcon" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tvNoteTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9/1/2018"
+        android:textColor="@color/list_item_text"
+        android:textSize="@dimen/note_timestamp_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNote" />
+
+</android.support.constraint.ConstraintLayout>

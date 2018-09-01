@@ -48,6 +48,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-2585351524810756/9845055228"/>
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
