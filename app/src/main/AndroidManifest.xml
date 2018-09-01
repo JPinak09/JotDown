@@ -24,15 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".EditorActivity"
-            android:label="@string/edit_note"
-            android:parentActivityName=".MainActivity" />
-
-        <provider
-            android:name=".Provider.NotesProvider"
-            android:authorities="com.joshipinak.jotdown.notesprovider"
-            android:exported="false" />
     </application>
 
 </manifest>

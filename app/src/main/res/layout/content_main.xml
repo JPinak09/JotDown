@@ -8,16 +8,15 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <ListView
-        android:id="@+id/android:list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
     <RelativeLayout
         android:id="@+id/empty_desc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_one"
@@ -48,6 +47,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
