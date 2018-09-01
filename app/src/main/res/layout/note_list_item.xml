@@ -26,7 +26,7 @@
         android:id="@+id/tvNoteTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9/1/2018"
+        android:text="@string/sample_text_output"
         android:textColor="@color/list_item_text"
         android:textSize="@dimen/note_timestamp_text_size"
         app:layout_constraintEnd_toEndOf="parent"
