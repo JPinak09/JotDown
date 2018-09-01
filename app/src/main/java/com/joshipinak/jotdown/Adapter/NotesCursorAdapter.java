@@ -46,7 +46,7 @@ public class NotesCursorAdapter extends CursorAdapter {
     /*
     Formatting timestamp to 'MMM d* format
     * input: 2018-01-09 10:11:45
-    *  output: September 1
+    *  output: September 1 2018
     */
     private String formatDate(String dateStr) {
         try {
@@ -59,6 +59,4 @@ public class NotesCursorAdapter extends CursorAdapter {
         }
         return "";
     }
-
-
 }

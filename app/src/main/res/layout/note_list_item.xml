@@ -5,31 +5,33 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/main_padding">
 
-    <ImageView
-        android:id="@+id/imageDocIcon"
-        android:layout_width="@dimen/icon_width_size"
-        android:layout_height="@dimen/icon_height_size"
-        android:contentDescription="@string/list_image_icon"
-        android:src="@drawable/ic_document"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
-        android:paddingTop="4dp"
-        android:id="@+id/tvNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/list_item_text"
-        android:textSize="@dimen/note_text_size"
-        app:layout_constraintStart_toEndOf="@+id/imageDocIcon" />
-
-    <TextView
+        android:textStyle="bold"
         android:id="@+id/tvNoteTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sample_text_output"
         android:textColor="@color/list_item_text"
         android:textSize="@dimen/note_timestamp_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNote" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageDocIcon"
+        android:layout_width="@dimen/icon_width_size"
+        android:layout_height="@dimen/icon_height_size"
+        android:contentDescription="@string/list_image_icon"
+        android:src="@drawable/ic_document"
+        app:layout_constraintTop_toBottomOf="@+id/tvNoteTimestamp" />
+
+    <TextView
+        android:id="@+id/tvNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:textColor="@color/list_item_text"
+        android:textSize="@dimen/note_text_size"
+        app:layout_constraintStart_toEndOf="@+id/imageDocIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tvNoteTimestamp" />
+
 
 </android.support.constraint.ConstraintLayout>

@@ -22,7 +22,7 @@ public class DBOpenHelper extends SQLiteOpenHelper{
             "CREATE TABLE " + TABLE_NOTES + " (" +
                     NOTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     NOTE_TEXT + " TEXT, " +
-                    NOTE_CREATED + " TEXT default CURRENT_TIMESTAMP" +
+                    NOTE_CREATED + " DATETIME default (datetime('now','localtime'))" +
                     ")";
     public DBOpenHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
