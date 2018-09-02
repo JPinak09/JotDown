@@ -1,19 +1,30 @@
 package com.joshipinak.jotdown;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -66,10 +77,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         notesAdapter = new NotesAdapter(this, notesList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, LinearLayoutManager.VERTICAL, 16));
+//        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, LinearLayoutManager.VERTICAL, 16));
         recyclerView.setAdapter(notesAdapter);
 
         toggleEmptyNotes();
@@ -156,10 +167,10 @@ public class MainActivity extends AppCompatActivity {
      * Open Dialog with Edit/Delete Options
      */
     private void showActionsDialog(final int position) {
-//        Integer colors[] = new Integer[]{R.drawable.baseline_done_white_24, R.drawable.baseline_delete_24};
-        CharSequence colors[] = new CharSequence[]{"Edit", "Delete"};
+        CharSequence choices[] = new CharSequence[]{"Edit", "Delete"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setItems(colors, new DialogInterface.OnClickListener() {
+        builder.setTitle("Choose operation");
+        builder.setItems(choices, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
@@ -187,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
         alertDialogBuilderUserInput.setView(view);
 
         final EditText inputNote = view.findViewById(R.id.note);
+        TextView dialogTitle = view.findViewById(R.id.dialog_title);
+        dialogTitle.setText(!shouldUpdate ? getString(R.string.new_note) : getString(R.string.edit_note));
         if (shouldUpdate && note != null) {
             inputNote.setText(note.getNote());
         }
@@ -194,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton(shouldUpdate ? "update" : "save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogBox, int id) {
-
+                        Toast.makeText(MainActivity.this, "Press and Hold to edit", Toast.LENGTH_LONG).show();
                     }
                 })
                 .setNegativeButton("cancel",

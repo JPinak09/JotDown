@@ -30,12 +30,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView note, timeStamp;
-        public ImageView noteBullet;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             note = itemView.findViewById(R.id.tvNote);
-            noteBullet = itemView.findViewById(R.id.imageDocIcon);
             timeStamp = itemView.findViewById(R.id.tvNoteTimestamp);
         }
     }
@@ -58,8 +56,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Note note = notesList.get(position);
         holder.note.setText(note.getNote());
-        holder.noteBullet.setImageResource(R.drawable.ic_document);
-
         // Formatting and Displaying timestamp
         holder.timeStamp.setText(formatDate(note.getTimestamp()));
 
@@ -86,6 +82,5 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     public int getItemCount() {
         return notesList.size();
     }
-
 
 }
