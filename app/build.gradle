@@ -9,7 +9,7 @@ android {
         config {
             keyAlias 'NinjaKey'
             keyPassword '12344321'
-            storeFile file('C:/Users/pinak/keystores/android_key_store.jks')
+            storeFile file('/home/jpinak/Documents/keystores/android_key_store.jks')
             storePassword '123321'
         }
     }
@@ -29,6 +29,7 @@ android {
             signingConfig signingConfigs.config
         }
     }
+    buildToolsVersion '28.0.2'
 }
 
 dependencies {

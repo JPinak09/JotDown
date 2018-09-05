@@ -1,17 +1,13 @@
 package com.joshipinak.jotdown.Adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.joshipinak.jotdown.DBHelper.DBOpenHelper;
 import com.joshipinak.jotdown.Model.Note;
 import com.joshipinak.jotdown.R;
 
@@ -24,14 +20,14 @@ import java.util.Locale;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder> {
 
-    private Context context;
-    private List<Note> notesList;
+    private final List<Note> notesList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView note, timeStamp;
+        final TextView note;
+        final TextView timeStamp;
 
-        public MyViewHolder(@NonNull View itemView) {
+        MyViewHolder(@NonNull View itemView) {
             super(itemView);
             note = itemView.findViewById(R.id.tvNote);
             timeStamp = itemView.findViewById(R.id.tvNoteTimestamp);
@@ -39,7 +35,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     }
 
     public NotesAdapter(Context context, List<Note> notesList) {
-        this.context = context;
+        Context context1 = context;
         this.notesList = notesList;
     }
 
@@ -83,4 +79,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
         return notesList.size();
     }
 
+    public void clear() {
+        final int size = notesList.size();
+        notesList.clear();
+        notifyItemRangeRemoved(0, size);
+    }
 }

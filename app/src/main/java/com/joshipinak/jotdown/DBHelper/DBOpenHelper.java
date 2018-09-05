@@ -18,12 +18,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 3;
 
     //Constants for identifying table and columns
-    public static final String TABLE_NOTES = "notes";
-    public static final String NOTE_ID = "_id";
-    public static final String NOTE_TEXT = "noteText";
-    public static final String NOTE_CREATED = "noteCreated";
-
-    public static final String[] ALL_COLUMNS = {NOTE_ID, NOTE_TEXT, NOTE_CREATED};
+    private static final String TABLE_NOTES = "notes";
+    private static final String NOTE_ID = "_id";
+    private static final String NOTE_TEXT = "noteText";
+    private static final String NOTE_CREATED = "noteCreated";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NOTES + " (" +
@@ -70,10 +68,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     // Reading Data
     /*
-    * getNote(): Takes already existing note id and fetches the note object
-    * getAllNotes(): Fetches all the notes in descending order by timestamp.
-    * getNotesCount(): returns the count of notes stored in database.
-    */
+     * getNote(): Takes already existing note id and fetches the note object
+     * getAllNotes(): Fetches all the notes in descending order by timestamp.
+     * getNotesCount(): returns the count of notes stored in database.
+     */
 
     public Note getNote(long id) {
         // get readable database as we aren't inserting anything
@@ -96,7 +94,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return note;
     }
 
-    public List<Note> getAllNotes(){
+    public List<Note> getAllNotes() {
         List<Note> notes = new ArrayList<>();
 
         // Select all query
@@ -106,7 +104,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all the rows and adding to the list
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 Note note = new Note();
                 note.setId(cursor.getInt(cursor.getColumnIndex(Note.NOTE_ID)));
@@ -115,7 +113,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
                 notes.add(note);
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         db.close();
         cursor.close();
@@ -123,10 +121,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return notes;
     }
 
-    public int getNotesCount(){
+    public int getNotesCount() {
         String countQuery = "SELECT * FROM " + Note.TABLE_NOTES;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery,null);
+        Cursor cursor = db.rawQuery(countQuery, null);
 
         int count = cursor.getCount();
         cursor.close();
@@ -135,24 +133,31 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     // Updating Data
-    public int updateNote(Note note){
+    public void updateNote(Note note) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(Note.NOTE_TEXT, note.getNote());
 
         // updating row
-        return db.update(Note.TABLE_NOTES,values,Note.NOTE_ID + "=?",
+        db.update(Note.TABLE_NOTES, values, Note.NOTE_ID + "=?",
                 new String[]{String.valueOf(note.getId())});
 
     }
 
     // Deleting data
-    public void deleteNote(Note note){
+    public void deleteNote(Note note) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(Note.TABLE_NOTES, Note.NOTE_ID + "=?",
                 new String[]{String.valueOf(note.getId())});
+        db.close();
+    }
+
+    // Deleting all data
+    public void deleteAllNotes() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Note.TABLE_NOTES, null, null);
         db.close();
     }
 }

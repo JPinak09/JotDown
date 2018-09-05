@@ -1,27 +1,19 @@
 package com.joshipinak.jotdown;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,7 +25,6 @@ import com.google.android.gms.ads.MobileAds;
 import com.joshipinak.jotdown.Adapter.NotesAdapter;
 import com.joshipinak.jotdown.DBHelper.DBOpenHelper;
 import com.joshipinak.jotdown.Model.Note;
-import com.joshipinak.jotdown.utils.MyDividerItemDecoration;
 import com.joshipinak.jotdown.utils.RecyclerTouchListener;
 
 import java.util.ArrayList;
@@ -42,8 +33,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private NotesAdapter notesAdapter;
-    private List<Note> notesList = new ArrayList<>();
-    private RecyclerView recyclerView;
+    private final List<Note> notesList = new ArrayList<>();
     private RelativeLayout noNotesView;
 
     private DBOpenHelper dbOpenHelper;
@@ -62,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         noNotesView = findViewById(R.id.empty_desc);
 
         dbOpenHelper = new DBOpenHelper(this);
         notesList.addAll(dbOpenHelper.getAllNotes());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,10 +67,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         notesAdapter = new NotesAdapter(this, notesList);
-        RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, LinearLayoutManager.VERTICAL, 16));
         recyclerView.setAdapter(notesAdapter);
 
         toggleEmptyNotes();
@@ -97,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view, int position) {
-
+                Toast.makeText(MainActivity.this, "Long click on item to edit", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -167,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
      * Open Dialog with Edit/Delete Options
      */
     private void showActionsDialog(final int position) {
-        CharSequence choices[] = new CharSequence[]{"Edit", "Delete"};
+        CharSequence choices[] = new CharSequence[]{"Edit current note", "Delete current note"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose operation");
         builder.setItems(choices, new DialogInterface.OnClickListener() {
@@ -194,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater layoutInflaterAndroid = LayoutInflater.from(getApplicationContext());
         View view = layoutInflaterAndroid.inflate(R.layout.custom_dialog_layout, null);
         AlertDialog.Builder alertDialogBuilderUserInput =
-                new AlertDialog.Builder(MainActivity.this);
+                new AlertDialog.Builder(MainActivity.this,android.R.style.Theme_Light_NoTitleBar_Fullscreen);
         alertDialogBuilderUserInput.setView(view);
 
         final EditText inputNote = view.findViewById(R.id.note);
@@ -252,4 +241,30 @@ public class MainActivity extends AppCompatActivity {
             noNotesView.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_delete_all:
+                dbOpenHelper.deleteAllNotes();
+                notesAdapter.notifyDataSetChanged();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        notesAdapter.clear();
+//    }
 }

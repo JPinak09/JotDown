@@ -7,7 +7,6 @@ public class Note {
     public static final String NOTE_ID = "_id";       // to uniquely identify
     public static final String NOTE_TEXT = "noteText"; // stores the actual note text
     public static final String NOTE_CREATED = "noteCreated"; // timestamp of when your note is created
-
     private int id;
     private String note;
     private String timestamp;

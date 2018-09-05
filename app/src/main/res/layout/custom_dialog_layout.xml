@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_margin"
-    android:paddingRight="@dimen/activity_margin"
-    android:paddingTop="@dimen/activity_margin">
+    android:layout_margin="@dimen/item_margin"
+    android:padding="@dimen/item_padding">
 
     <TextView
         android:id="@+id/dialog_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_10"
-        android:fontFamily="sans-serif-medium"
-        android:lineSpacingExtra="8sp"
+        android:fontFamily="@string/sans_serif_medium"
+        android:lineSpacingExtra="@dimen/line_spacing"
         android:textColor="@color/colorAccent"
-        android:textSize="18sp"
+        android:textSize="@dimen/dialog_title_text_size"
         android:textStyle="normal" />
 
     <EditText
         android:id="@+id/note"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/dialog_title"
         android:background="@android:color/transparent"
         android:gravity="top"
         android:hint="@string/enter_your_note_here"
@@ -30,4 +28,4 @@
         android:textColorHint="@color/date_text"
         android:textSize="@dimen/note_text_size" />
 
-</LinearLayout>
+</RelativeLayout>

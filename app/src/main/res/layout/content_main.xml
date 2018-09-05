@@ -24,11 +24,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/no_notes"
-            android:textSize="20sp"
+            android:textSize="@dimen/note_text_size"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_one"
@@ -46,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+            ads:adSize="@string/smart_banner"
+            ads:adUnitId="@string/add_unit_id" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
